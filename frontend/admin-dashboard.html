@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — REWEAR.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-inner">
+    <div class="site-top" id="siteTop">
+        <div class="announcement-bar">
+            <div class="container announcement-bar__inner">
+                TEES FROM ₹99 · PANTS FROM ₹299 · GOWNS FROM ₹399 · FREE SHIPPING OVER ₹499
+            </div>
+        </div>
+        <header class="site-header">
+            <div class="container navbar">
+                <a href="index.html" class="logo">REWEAR.</a>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="index.html">Home</a>
+                    <a href="admin-dashboard.html" class="active">Admin</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-outline btn-sm">Sign in</a>
+                </div>
+                <button class="mobile-menu-btn" type="button" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="container">
+        <section class="dashboard-header">
+            <h2>Admin Dashboard</h2>
+            <p>Manage users, products, and platform operations</p>
+        </section>
+
+        <section class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="pending">Pending Approvals</button>
+            <button class="tab-btn" data-tab="users">User Management</button>
+            <button class="tab-btn" data-tab="products">All Products</button>
+            <button class="tab-btn" data-tab="stats">Platform Statistics</button>
+        </section>
+
+        <section id="pending" class="tab-content active">
+            <h3>Pending Product Approvals</h3>
+            <div class="approval-list">
+                <div class="approval-card">
+                    <div class="approval-info">
+                        <h4>Summer Floral Dress</h4>
+                        <p>Seller: Jane Smith</p>
+                        <p>Category: Dresses</p>
+                        <p>Daily Rental: ₹25</p>
+                        <p>Purchase Price: ₹89</p>
+                        <p>Submitted: Jan 19, 2024</p>
+                    </div>
+                    <div class="approval-actions">
+                        <button class="btn approve-btn">Approve</button>
+                        <button class="btn reject-btn">Reject</button>
+                        <button class="btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="approval-card">
+                    <div class="approval-info">
+                        <h4>Designer Handbag</h4>
+                        <p>Seller: Mike Johnson</p>
+                        <p>Category: Accessories</p>
+                        <p>Daily Rental: ₹20</p>
+                        <p>Purchase Price: ₹1,200</p>
+                        <p>Submitted: Jan 18, 2024</p>
+                    </div>
+                    <div class="approval-actions">
+                        <button class="btn approve-btn">Approve</button>
+                        <button class="btn reject-btn">Reject</button>
+                        <button class="btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="approval-card">
+                    <div class="approval-info">
+                        <h4>Formal Blazer</h4>
+                        <p>Seller: Sarah Williams</p>
+                        <p>Category: Suits</p>
+                        <p>Daily Rental: ₹40</p>
+                        <p>Purchase Price: ₹380</p>
+                        <p>Submitted: Jan 17, 2024</p>
+                    </div>
+                    <div class="approval-actions">
+                        <button class="btn approve-btn">Approve</button>
+                        <button class="btn reject-btn">Reject</button>
+                        <button class="btn view-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="users" class="tab-content">
+            <h3>User Management</h3>
+            <div class="user-list">
+                <div class="user-card">
+                    <div class="user-info">
+                        <h4>John Doe</h4>
+                        <p>Email: john@example.com</p>
+                        <p>Type: Buyer</p>
+                        <p>Joined: Jan 10, 2024</p>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn view-btn">View Profile</button>
+                        <button class="btn deactivate-btn">Deactivate</button>
+                    </div>
+                </div>
+
+                <div class="user-card">
+                    <div class="user-info">
+                        <h4>Jane Smith</h4>
+                        <p>Email: jane@example.com</p>
+                        <p>Type: Seller</p>
+                        <p>Joined: Jan 12, 2024</p>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn view-btn">View Profile</button>
+                        <button class="btn deactivate-btn">Deactivate</button>
+                    </div>
+                </div>
+
+                <div class="user-card">
+                    <div class="user-info">
+                        <h4>Mike Johnson</h4>
+                        <p>Email: mike@example.com</p>
+                        <p>Type: Seller</p>
+                        <p>Joined: Jan 15, 2024</p>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn view-btn">View Profile</button>
+                        <button class="btn deactivate-btn">Deactivate</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="tab-content">
+            <h3>All Products</h3>
+            <div class="product-filters">
+                <select id="productStatusFilter">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="available">Available</option>
+                    <option value="rented">Rented</option>
+                    <option value="sold">Sold</option>
+                </select>
+            </div>
+            <div class="product-list">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product-anarkali.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Elegant Evening Dress</h4>
+                        <p>Seller: Jane Smith</p>
+                        <p>Status: <span class="status approved">Approved</span></p>
+                        <div class="product-actions">
+                            <button class="btn view-btn">View</button>
+                            <button class="btn edit-btn">Edit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product-anarkali.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Classic Black Suit</h4>
+                        <p>Seller: Mike Johnson</p>
+                        <p>Status: <span class="status available">Available</span></p>
+                        <div class="product-actions">
+                            <button class="btn view-btn">View</button>
+                            <button class="btn edit-btn">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats" class="tab-content">
+            <h3>Platform Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Users</h4>
+                    <p class="stat-value">1,234</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Products</h4>
+                    <p class="stat-value">567</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Orders</h4>
+                    <p class="stat-value">890</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Rentals</h4>
+                    <p class="stat-value">456</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Active Rentals</h4>
+                    <p class="stat-value">78</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Pending Approvals</h4>
+                    <p class="stat-value">12</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Revenue</h4>
+                    <p class="stat-value">₹45,678</p>
+                </div>
+                <div class="stat-card">
+                    <h4>This Month Revenue</h4>
+                    <p class="stat-value">₹5,432</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ReWear</h3>
+                <p>Admin Panel</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ReWear. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

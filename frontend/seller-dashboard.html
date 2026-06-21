@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard — REWEAR.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-inner">
+    <div class="site-top" id="siteTop">
+        <div class="announcement-bar">
+            <div class="container announcement-bar__inner">
+                TEES FROM ₹99 · PANTS FROM ₹299 · GOWNS FROM ₹399 · FREE SHIPPING OVER ₹499
+            </div>
+        </div>
+        <header class="site-header">
+            <div class="container navbar">
+                <a href="index.html" class="logo">REWEAR.</a>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="index.html">Home</a>
+                    <a href="marketplace.html">Shop</a>
+                    <a href="seller-dashboard.html" class="active">Sell</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-outline btn-sm">Sign in</a>
+                </div>
+                <button class="mobile-menu-btn" type="button" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="container">
+        <section class="dashboard-header">
+            <h2>Seller Dashboard</h2>
+            <p>Manage your products and track sales</p>
+        </section>
+
+        <section class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="my-products">My Products</button>
+            <button class="tab-btn" data-tab="add-product">Add Product</button>
+            <button class="tab-btn" data-tab="sales">Sales</button>
+        </section>
+
+        <section id="my-products" class="tab-content active">
+            <h3>My Products</h3>
+            <div class="product-list">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product-sherwani.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Elegant Evening Dress</h4>
+                        <p>Category: Dresses</p>
+                        <p>Daily Rental: ₹45</p>
+                        <p>Purchase Price: ₹299</p>
+                        <p>Status: <span class="status approved">Approved</span></p>
+                        <div class="product-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product-sherwani.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Summer Floral Dress</h4>
+                        <p>Category: Dresses</p>
+                        <p>Daily Rental: ₹25</p>
+                        <p>Purchase Price: ₹89</p>
+                        <p>Status: <span class="status pending">Pending Approval</span></p>
+                        <div class="product-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product-sherwani.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Casual Denim Jacket</h4>
+                        <p>Category: Casual Wear</p>
+                        <p>Daily Rental: ₹15</p>
+                        <p>Purchase Price: ₹120</p>
+                        <p>Status: <span class="status available">Available</span></p>
+                        <div class="product-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="add-product" class="tab-content">
+            <h3>Add New Product</h3>
+            <form class="add-product-form" id="listingForm">
+                <div class="form-group">
+                    <label for="addProductName">Product Name:</label>
+                    <input type="text" id="addProductName" required placeholder="e.g. Silk Banarasi Saree">
+                </div>
+                <div class="form-group">
+                    <label for="addProductCategory">Category:</label>
+                    <select id="addProductCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="sarees">Sarees</option>
+                        <option value="lehengas">Lehengas</option>
+                        <option value="sherwanis">Sherwanis</option>
+                        <option value="kurtas">Kurtas</option>
+                        <option value="gowns">Gowns & Dresses</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addProductBrand">Brand:</label>
+                    <input type="text" id="addProductBrand" required placeholder="e.g. Sabyasachi, FabIndia, Raw Mango">
+                </div>
+                <div class="form-group">
+                    <label for="addProductSize">Size:</label>
+                    <select id="addProductSize" required>
+                        <option value="">Select Size</option>
+                        <option value="free">Free Size</option>
+                        <option value="xs">XS</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addProductCondition">Condition:</label>
+                    <select id="addProductCondition" required>
+                        <option value="">Select Condition</option>
+                        <option value="New">New (Never Worn)</option>
+                        <option value="Worn Once">Worn Once</option>
+                        <option value="Good">Good Condition</option>
+                        <option value="Well Worn">Well Worn</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addProductOrigPrice">Original Price (₹):</label>
+                    <input type="number" id="addProductOrigPrice" required placeholder="e.g. 5000">
+                </div>
+                <div class="form-group">
+                    <label for="addProductPrice">Selling Price (₹):</label>
+                    <input type="number" id="addProductPrice" required placeholder="e.g. 2500">
+                </div>
+                <div class="form-group">
+                    <label for="addProductDesc">Description:</label>
+                    <textarea id="addProductDesc" rows="4" required placeholder="Describe the fabric, work, fit, flaws, and how many times it was worn..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="addProductImage">Upload Product Images:</label>
+                    <input type="file" id="addProductImage" accept="image/*" required>
+                    <div id="imagePreviewContainer" style="margin-top: 12px; display: none;">
+                        <img id="imagePreview" src="" alt="Listing Preview" style="max-width: 200px; border-radius: 6px; border: 1px solid var(--border);">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addProductSeller">Seller Name:</label>
+                    <input type="text" id="addProductSeller" required placeholder="e.g. Priya Sharma">
+                </div>
+                <div class="form-group">
+                    <label for="addProductLocation">Location:</label>
+                    <input type="text" id="addProductLocation" required placeholder="e.g. Mumbai, Maharashtra">
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Submit Listing</button>
+            </form>
+        </section>
+
+        <section id="sales" class="tab-content">
+            <h3>Sales Summary</h3>
+            <div class="sales-stats">
+                <div class="stat-card">
+                    <h4>Total Sales</h4>
+                    <p class="stat-value">₹1,250</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Rentals</h4>
+                    <p class="stat-value">45</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Active Products</h4>
+                    <p class="stat-value">12</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Pending Approval</h4>
+                    <p class="stat-value">2</p>
+                </div>
+            </div>
+
+            <h3>Recent Transactions</h3>
+            <div class="transaction-list">
+                <div class="transaction-card">
+                    <div class="transaction-info">
+                        <h4>Elegant Evening Dress - Rental</h4>
+                        <p>Buyer: John Doe</p>
+                        <p>Date: Jan 20, 2024</p>
+                    </div>
+                    <div class="transaction-amount">₹135</div>
+                </div>
+
+                <div class="transaction-card">
+                    <div class="transaction-info">
+                        <h4>Summer Floral Dress - Purchase</h4>
+                        <p>Buyer: Jane Wilson</p>
+                        <p>Date: Jan 18, 2024</p>
+                    </div>
+                    <div class="transaction-amount">₹89</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ReWear</h3>
+                <p>Sustainable Fashion Rental Platform</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ReWear. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

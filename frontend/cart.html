@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart — REWEAR.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 24px;
+            margin-bottom: 60px;
+        }
+        @media (max-width: 768px) {
+            .cart-container { grid-template-columns: 1fr; }
+        }
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: var(--radius);
+        }
+        .cart-item img {
+            width: 100px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: var(--bg);
+        }
+        .cart-item-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .cart-item-title { font-size: 18px; margin-bottom: 8px; font-family: var(--serif); color: var(--text); }
+        .cart-item-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+        .cart-item-price { font-size: 16px; font-weight: 600; color: var(--gold); margin-top: 8px; }
+        .cart-item-remove { 
+            align-self: flex-start;
+            background: none; border: none; color: var(--text-muted); cursor: pointer;
+            padding: 4px;
+        }
+        .cart-item-remove:hover { color: var(--danger); }
+        .cart-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: var(--radius);
+            position: sticky;
+            top: calc(var(--top-h) + 20px);
+            height: fit-content;
+        }
+        .cart-summary h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-family: var(--serif);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+        .summary-totals .totals-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+        .summary-totals .grand-total {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        .empty-cart-msg {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-card);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            grid-column: 1 / -1;
+        }
+        .empty-cart-msg p { margin-bottom: 20px; color: var(--text-muted); }
+    </style>
+</head>
+<body class="page-inner">
+    <div class="site-top" id="siteTop">
+        <div class="announcement-bar">
+            <div class="container announcement-bar__inner">
+                TEES FROM ₹99 · PANTS FROM ₹299 · GOWNS FROM ₹399 · FREE SHIPPING OVER ₹499
+            </div>
+        </div>
+        <header class="site-header">
+            <div class="container navbar">
+                <a href="index.html" class="logo">REWEAR.</a>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="index.html">Home</a>
+                    <a href="marketplace.html">Shop</a>
+                    <a href="buyer-dashboard.html">Dashboard</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-gold">Sign in</a>
+                </div>
+                <button class="mobile-menu-btn" type="button" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="container">
+        <section class="dashboard-header">
+            <h2>Your Cart</h2>
+            <p>Review your preloved items before checkout</p>
+        </section>
+
+        <div class="cart-container" id="cartContainer">
+            <!-- Rendered by script.js -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCartPage();
+        });
+    </script>
+</body>
+</html>

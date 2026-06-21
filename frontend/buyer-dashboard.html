@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account — REWEAR.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-inner">
+    <div class="site-top" id="siteTop">
+        <div class="announcement-bar">
+            <div class="container announcement-bar__inner">
+                TEES FROM ₹99 · PANTS FROM ₹299 · GOWNS FROM ₹399 · FREE SHIPPING OVER ₹499
+            </div>
+        </div>
+        <header class="site-header">
+            <div class="container navbar">
+                <a href="index.html" class="logo">REWEAR.</a>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="index.html">Home</a>
+                    <a href="marketplace.html">Shop</a>
+                    <a href="buyer-dashboard.html" class="active">Dashboard</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-outline btn-sm">Sign in</a>
+                </div>
+                <button class="mobile-menu-btn" type="button" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="container">
+        <section class="dashboard-header">
+            <h2>Buyer Dashboard</h2>
+            <p>Manage your rentals, orders, and wishlist</p>
+        </section>
+
+        <section class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="orders">My Orders</button>
+            <button class="tab-btn" data-tab="rentals">My Rentals</button>
+            <button class="tab-btn" data-tab="wishlist">Wishlist</button>
+            <button class="tab-btn" data-tab="recommendations">Recommendations</button>
+        </section>
+
+        <section id="orders" class="tab-content active">
+            <h3>My Orders</h3>
+            <div class="order-list">
+                <!-- Loaded dynamically from localStorage -->
+            </div>
+        </section>
+
+        <section id="rentals" class="tab-content">
+            <h3>My Rentals</h3>
+            <div class="rental-list">
+                <div class="rental-card">
+                    <div class="rental-info">
+                        <h4>Rental #567</h4>
+                        <p>Product: Classic Black Suit</p>
+                        <p>Rental Period: Jan 22 - Jan 25, 2024</p>
+                        <p>Fee: ₹105</p>
+                        <p>Status: <span class="status active">Active</span></p>
+                    </div>
+                    <div class="rental-actions">
+                        <button class="btn return-btn">Return Item</button>
+                    </div>
+                </div>
+
+                <div class="rental-card">
+                    <div class="rental-info">
+                        <h4>Rental #566</h4>
+                        <p>Product: Summer Floral Dress</p>
+                        <p>Rental Period: Jan 10 - Jan 13, 2024</p>
+                        <p>Fee: ₹75</p>
+                        <p>Status: <span class="status returned">Returned</span></p>
+                    </div>
+                    <div class="rental-actions">
+                        <button class="btn rent-again-btn">Rent Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="wishlist" class="tab-content">
+            <h3>My Wishlist</h3>
+            <div class="wishlist-grid products-grid" style="margin-top: 20px;">
+                <!-- Loaded dynamically from localStorage -->
+            </div>
+        </section>
+
+        <section id="recommendations" class="tab-content">
+            <h3>Recommended for You</h3>
+            <div class="recommendation-grid">
+                <div class="recommendation-item">
+                    <div class="product-image">
+                        <img src="assets/product-anarkali.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Evening Gown</h4>
+                        <p>Based on your interest in dresses</p>
+                        <p class="rental-price">₹50/day</p>
+                        <button class="btn rent-btn">Rent</button>
+                    </div>
+                </div>
+
+                <div class="recommendation-item">
+                    <div class="product-image">
+                        <img src="assets/product-anarkali.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Designer Clutch</h4>
+                        <p>Based on your wishlist</p>
+                        <p class="rental-price">₹15/day</p>
+                        <button class="btn rent-btn">Rent</button>
+                    </div>
+                </div>
+
+                <div class="recommendation-item">
+                    <div class="product-image">
+                        <img src="assets/product-anarkali.jpg" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Casual Blazer</h4>
+                        <p>Popular in your size</p>
+                        <p class="rental-price">₹30/day</p>
+                        <button class="btn rent-btn">Rent</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ReWear</h3>
+                <p>Sustainable Fashion Rental Platform</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ReWear. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

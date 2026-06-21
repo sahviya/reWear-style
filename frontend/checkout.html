@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — REWEAR.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            margin-top: 24px;
+        }
+
+        .checkout-section-title {
+            font-family: var(--serif);
+            font-size: 20px;
+            margin-bottom: 18px;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .checkout-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group-custom {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group-custom label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-group-custom input,
+        .form-group-custom select {
+            padding: 12px;
+            font-size: 14px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            transition: border-color 0.15s ease;
+        }
+
+        .form-group-custom input:focus,
+        .form-group-custom select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Payment Tabs styling */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-soft);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .payment-tab input {
+            display: none;
+        }
+
+        .payment-tab svg {
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .payment-tab span {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .payment-tab:hover {
+            border-color: var(--border-hover);
+        }
+
+        .payment-tab.active {
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.08);
+        }
+
+        .payment-tab.active svg,
+        .payment-tab.active span {
+            color: var(--gold);
+        }
+
+        .payment-details-panel {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-panel {
+            display: none;
+        }
+
+        .payment-panel.active {
+            display: block;
+            animation: fadeIn 0.25s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Order Summary Card */
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            position: sticky;
+            top: calc(var(--top-h) + 20px);
+        }
+
+        .summary-item-row {
+            display: flex;
+            gap: 16px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .summary-item-img {
+            width: 70px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+        }
+
+        .summary-item-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .summary-item-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .summary-item-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .summary-item-price {
+            font-weight: 500;
+            color: var(--gold);
+        }
+
+        .summary-totals {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .totals-row.grand-total {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .totals-row.grand-total span:last-child {
+            color: var(--gold);
+        }
+
+        /* Success Overlay */
+        .success-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.98);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .success-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .success-content {
+            max-width: 480px;
+            padding: 40px var(--gutter);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 40px;
+            background: rgba(201, 168, 76, 0.05);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
+            animation: pulseRing 2s infinite;
+        }
+
+        @keyframes pulseRing {
+            0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(201, 168, 76, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+        }
+
+        .success-title {
+            font-family: var(--serif);
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .success-text {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 992px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+            .summary-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="page-inner">
+    <div class="site-top" id="siteTop">
+        <div class="announcement-bar">
+            <div class="container announcement-bar__inner">
+                TEES FROM ₹99 · PANTS FROM ₹299 · GOWNS FROM ₹399 · FREE SHIPPING OVER ₹499
+            </div>
+        </div>
+        <header class="site-header">
+            <div class="container navbar">
+                <a href="index.html" class="logo">REWEAR.</a>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="index.html">Home</a>
+                    <a href="marketplace.html">Shop</a>
+                    <a href="seller-dashboard.html">Sell</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-outline btn-sm">Sign in</a>
+                </div>
+                <button class="mobile-menu-btn" type="button" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="container">
+        <section class="dashboard-header" style="margin-bottom: 24px;">
+            <h2>Secure Checkout</h2>
+            <p>Complete your purchase of curated preloved occasion wear</p>
+        </section>
+
+        <div class="checkout-grid">
+            <!-- Left Panel: Form & Payment -->
+            <div>
+                <form id="checkoutForm" class="checkout-form" onsubmit="submitOrder(event)">
+                    <!-- Shipping Address Section -->
+                    <div class="checkout-section">
+                        <h3 class="checkout-section-title">1. Shipping Address</h3>
+                        <div class="form-grid-2">
+                            <div class="form-group-custom">
+                                <label for="custName">Full Name</label>
+                                <input type="text" id="custName" required placeholder="e.g. Rohan Malhotra">
+                            </div>
+                            <div class="form-group-custom">
+                                <label for="custEmail">Email Address</label>
+                                <input type="email" id="custEmail" required placeholder="e.g. rohan@gmail.com">
+                            </div>
+                        </div>
+                        <div class="form-group-custom">
+                            <label for="custAddress">Street Address</label>
+                            <input type="text" id="custAddress" required placeholder="Apartment, suite, block, street details">
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group-custom">
+                                <label for="custCity">City</label>
+                                <input type="text" id="custCity" required placeholder="e.g. Mumbai">
+                            </div>
+                            <div class="form-group-custom">
+                                <label for="custState">State</label>
+                                <select id="custState" required>
+                                    <option value="">Select State</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group-custom">
+                                <label for="custPin">PIN Code</label>
+                                <input type="text" id="custPin" pattern="[0-9]{6}" required placeholder="6-digit ZIP code" title="Please enter a valid 6-digit pin code">
+                            </div>
+                            <div class="form-group-custom">
+                                <label for="custPhone">Phone Number</label>
+                                <input type="tel" id="custPhone" pattern="[6789][0-9]{9}" required placeholder="10-digit mobile number" title="Please enter a valid 10-digit Indian phone number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Section -->
+                    <div class="checkout-section" style="margin-top: 30px;">
+                        <h3 class="checkout-section-title">2. Payment Method</h3>
+                        <div class="payment-methods">
+                            <!-- UPI Option -->
+                            <div class="payment-tab active" onclick="switchPayment('upi', this)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" ry="2"/>
+                                    <line x1="2" y1="10" x2="22" y2="10"/>
+                                </svg>
+                                <span>UPI</span>
+                            </div>
+
+                            <!-- Card Option -->
+                            <div class="payment-tab" onclick="switchPayment('card', this)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" ry="2"/>
+                                    <circle cx="6" cy="14" r="1"/>
+                                    <circle cx="10" cy="14" r="1"/>
+                                </svg>
+                                <span>Card</span>
+                            </div>
+
+                            <!-- Netbanking Option -->
+                            <div class="payment-tab" onclick="switchPayment('netbanking', this)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>
+                                </svg>
+                                <span>Net Banking</span>
+                            </div>
+
+                            <!-- COD Option -->
+                            <div class="payment-tab" onclick="switchPayment('cod', this)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="1" y="3" width="15" height="13" rx="2" ry="2"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                <span>COD</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-details-panel">
+                            <!-- UPI Details -->
+                            <div id="panel-upi" class="payment-panel active">
+                                <div class="form-group-custom">
+                                    <label for="upiId">UPI ID</label>
+                                    <input type="text" id="upiId" placeholder="e.g. rohan@upi" pattern="^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$">
+                                    <p style="font-size: 11px; color: var(--text-dim); margin-top: 4px;">Pay instantly using BHIM, GPay, PhonePe, or Paytm.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card Details -->
+                            <div id="panel-card" class="payment-panel">
+                                <div class="form-group-custom">
+                                    <label for="cardNumber">Card Number</label>
+                                    <input type="text" id="cardNumber" placeholder="16-digit card number" pattern="[0-9]{16}">
+                                </div>
+                                <div class="form-grid-2">
+                                    <div class="form-group-custom">
+                                        <label for="cardExpiry">Expiry Date</label>
+                                        <input type="text" id="cardExpiry" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/[0-9]{2}">
+                                    </div>
+                                    <div class="form-group-custom">
+                                        <label for="cardCvv">CVV</label>
+                                        <input type="password" id="cardCvv" placeholder="3 digits" pattern="[0-9]{3}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Netbanking Details -->
+                            <div id="panel-netbanking" class="payment-panel">
+                                <div class="form-group-custom">
+                                    <label for="bankSelect">Select Bank</label>
+                                    <select id="bankSelect">
+                                        <option value="">Choose your bank</option>
+                                        <option value="SBI">State Bank of India</option>
+                                        <option value="HDFC">HDFC Bank</option>
+                                        <option value="ICICI">ICICI Bank</option>
+                                        <option value="AXIS">Axis Bank</option>
+                                        <option value="KOTAK">Kotak Mahindra Bank</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- COD Details -->
+                            <div id="panel-cod" class="payment-panel">
+                                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+                                    <strong>Cash on Delivery:</strong> Please pay the exact amount of <span class="cod-amount-text" style="color: var(--gold); font-weight: 600;">₹0</span> in cash or via shipping partner's QR code at the time of delivery. A verification code will be sent to your mobile number before delivery.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Place Order Button -->
+                    <button type="submit" class="btn btn-gold btn-lg btn-block" style="border-radius: 6px; margin-top: 10px;">Place Order &rarr;</button>
+                </form>
+            </div>
+
+            <!-- Right Panel: Order Summary -->
+            <div>
+                <div class="summary-card">
+                    <h3 class="checkout-section-title">Order Summary</h3>
+                    
+                    <!-- Product Info row -->
+                    <div class="summary-item-row">
+                        <img id="summaryProdImg" src="" alt="Product" class="summary-item-img">
+                        <div class="summary-item-details">
+                            <h4 id="summaryProdTitle" class="summary-item-title">Product Name</h4>
+                            <p class="summary-item-meta">Size: <span id="summaryProdSize">-</span></p>
+                            <p class="summary-item-meta">Color: <span id="summaryProdColor">-</span></p>
+                            <p class="summary-item-meta">Quantity: <span id="summaryProdQty">1</span></p>
+                            <span id="summaryProdPrice" class="summary-item-price">₹0</span>
+                        </div>
+                    </div>
+
+                    <!-- Pricing breakdown -->
+                    <div class="summary-totals">
+                        <div class="totals-row">
+                            <span>Subtotal</span>
+                            <span id="summarySubtotal">₹0</span>
+                        </div>
+                        <div class="totals-row">
+                            <span>Shipping</span>
+                            <span id="summaryShipping">₹0</span>
+                        </div>
+                        <div class="totals-row grand-total" style="margin-top: 8px;">
+                            <span>Grand Total</span>
+                            <span id="summaryGrandTotal">₹0</span>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 11px; color: var(--text-dim); text-align: center;">
+                        Giving fashion a second life prevents textile waste. Thank you for choosing preloved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-content">
+            <div class="success-checkmark">✓</div>
+            <h2 class="success-title">Order Placed!</h2>
+            <p class="success-text">
+                Your order has been successfully placed. We've notified the seller to prepare shipment.<br><br>
+                Thank you for supporting sustainable fashion. Giving clothes a second life reduces waste and extends design beauty.
+            </p>
+            <p style="font-size: 12px; color: var(--gold); letter-spacing: 0.05em; font-weight: 500;">
+                REDIRECTING TO YOUR DASHBOARD...
+            </p>
+        </div>
+    </div>
+
+    <footer class="site-footer" style="margin-top: 80px;">
+        <div class="container footer__grid">
+            <div class="footer__brand">
+                <span class="logo">REWEAR.</span>
+                <p>Sustainable Fashion Rental Platform</p>
+            </div>
+            <div class="footer__col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="marketplace.html">All Listings</a></li>
+                    <li><a href="marketplace.html">Sarees</a></li>
+                    <li><a href="marketplace.html">Lehengas</a></li>
+                    <li><a href="marketplace.html">Sherwanis</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="login.html">Sign In</a></li>
+                    <li><a href="register.html">Create Account</a></li>
+                    <li><a href="buyer-dashboard.html">My Orders</a></li>
+                    <li><a href="seller-dashboard.html">Sell</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:hello@rewear.in">hello@rewear.in</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="container">
+                <p>&copy; 2026 ReWear. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let selectedPaymentMethod = 'upi';
+        let checkoutProduct = null;
+        let checkoutQty = 1;
+        let checkoutSize = 'Free Size';
+        let checkoutColor = 'Default';
+        let totalAmount = 0;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCheckoutDetails();
+        });
+
+        function loadCheckoutDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const isCartCheckout = params.get('fromCart') === 'true';
+            
+            const products = typeof getProducts === 'function' ? getProducts() : [];
+            let subtotal = 0;
+
+            if (isCartCheckout) {
+                // Load from cart
+                const cart = JSON.parse(localStorage.getItem('userCart') || '[]');
+                if (cart.length === 0) {
+                    window.location.href = 'cart.html';
+                    return;
+                }
+                
+                // Hide single item row and create dynamic list
+                const summaryRow = document.querySelector('.summary-item-row');
+                const parent = summaryRow.parentElement;
+                
+                let cartHtml = '<div class="cart-summary-list" style="margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">';
+                cart.forEach(item => {
+                    const product = products.find(p => p.id === item.id);
+                    if (product) {
+                        const itemTotal = product.price * (item.qty || 1);
+                        subtotal += itemTotal;
+                        cartHtml += `
+                            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                                <img src="${product.image}" style="width: 60px; height: 80px; object-fit: cover; border-radius: 4px;">
+                                <div style="flex-grow: 1;">
+                                    <h4 style="margin: 0 0 5px; font-size: 14px;">${product.title}</h4>
+                                    <p style="margin: 0; font-size: 12px; color: var(--text-muted);">Size: ${item.size} · Color: ${item.color}</p>
+                                    <p style="margin: 2px 0 0; font-size: 12px; color: var(--text-muted);">Qty: ${item.qty}</p>
+                                    <p style="margin: 5px 0 0; font-size: 14px; font-weight: 600;">₹${product.price}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                cartHtml += '</div>';
+                
+                // Replace single row
+                summaryRow.style.display = 'none';
+                summaryRow.insertAdjacentHTML('beforebegin', cartHtml);
+                
+                checkoutProduct = cart; // Store array for submit
+            } else {
+                // Single Buy Now flow
+                const id = params.get('id') || 'rose-pink-anarkali';
+                checkoutQty = parseInt(params.get('qty')) || 1;
+                checkoutSize = params.get('size') || 'Free Size';
+                checkoutColor = params.get('color') || 'Default';
+
+                checkoutProduct = products.find(p => p.id === id);
+
+                if (!checkoutProduct) {
+                    checkoutProduct = {
+                        id: "rose-pink-anarkali",
+                        title: "Gulaab Rose Pink Anarkali",
+                        price: 849,
+                        image: "assets/product-anarkali.jpg"
+                    };
+                }
+
+                document.getElementById('summaryProdImg').src = checkoutProduct.image;
+                document.getElementById('summaryProdTitle').textContent = checkoutProduct.title;
+                document.getElementById('summaryProdSize').textContent = checkoutSize;
+                document.getElementById('summaryProdColor').textContent = checkoutColor;
+                document.getElementById('summaryProdQty').textContent = checkoutQty;
+                document.getElementById('summaryProdPrice').textContent = `₹${checkoutProduct.price}`;
+
+                subtotal = checkoutProduct.price * checkoutQty;
+            }
+
+            const shipping = subtotal >= 499 ? 0 : 50;
+            totalAmount = subtotal + shipping;
+
+            document.getElementById('summarySubtotal').textContent = `₹${subtotal}`;
+            document.getElementById('summaryShipping').textContent = shipping === 0 ? 'Free' : `₹${shipping}`;
+            document.getElementById('summaryGrandTotal').textContent = `₹${totalAmount}`;
+
+            // Update COD note amount
+            const codAmtEls = document.querySelectorAll('.cod-amount-text');
+            codAmtEls.forEach(el => el.textContent = `₹${totalAmount}`);
+            
+            // Set required validation fields depending on initial payment
+            togglePaymentRequiredAttributes('upi');
+        }
+
+        function switchPayment(method, element) {
+            selectedPaymentMethod = method;
+
+            // Remove active classes from tabs
+            document.querySelectorAll('.payment-tab').forEach(tab => tab.classList.remove('active'));
+            // Add active class to clicked tab
+            element.classList.add('active');
+
+            // Hide all panels
+            document.querySelectorAll('.payment-panel').forEach(panel => panel.classList.remove('active'));
+            // Show corresponding panel
+            const activePanel = document.getElementById(`panel-${method}`);
+            if (activePanel) {
+                activePanel.classList.add('active');
+            }
+
+            togglePaymentRequiredAttributes(method);
+        }
+
+        function togglePaymentRequiredAttributes(method) {
+            const upiInput = document.getElementById('upiId');
+            const cardNum = document.getElementById('cardNumber');
+            const cardExp = document.getElementById('cardExpiry');
+            const cardCvv = document.getElementById('cardCvv');
+            const bankSelect = document.getElementById('bankSelect');
+
+            // Clear requirements
+            upiInput.required = false;
+            cardNum.required = false;
+            cardExp.required = false;
+            cardCvv.required = false;
+            bankSelect.required = false;
+
+            // Set dynamic requirements
+            if (method === 'upi') {
+                upiInput.required = true;
+            } else if (method === 'card') {
+                cardNum.required = true;
+                cardExp.required = true;
+                cardCvv.required = true;
+            } else if (method === 'netbanking') {
+                bankSelect.required = true;
+            }
+        }
+
+        async function submitOrder(e) {
+            e.preventDefault();
+
+            // Perform simple validation check
+            if (!checkoutProduct) return;
+
+            const orderBtn = e.target.querySelector('button[type="submit"]');
+            if (orderBtn) {
+                orderBtn.textContent = 'Processing...';
+                orderBtn.disabled = true;
+            }
+
+            try {
+                if (Array.isArray(checkoutProduct)) {
+                    // It's a cart checkout
+                    for (const item of checkoutProduct) {
+                        const products = typeof getProducts === 'function' ? getProducts() : [];
+                        const p = products.find(prod => prod.id === item.id) || { title: item.id, image: '', price: 0 };
+                        
+                        await fetch('http://localhost:8080/api/orders', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                buyerId: 1, // Defaulting to 1 for basic integration
+                                productId: parseInt(item.id) || 1,
+                                orderType: 'Purchase',
+                                totalAmount: (p.price * item.qty),
+                                status: 'Confirmed'
+                            })
+                        });
+                    }
+                    // Clear cart
+                    localStorage.setItem('userCart', JSON.stringify([]));
+                } else {
+                    await fetch('http://localhost:8080/api/orders', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            buyerId: 1,
+                            productId: parseInt(checkoutProduct.id) || 1,
+                            orderType: 'Purchase',
+                            totalAmount: totalAmount,
+                            status: 'Confirmed'
+                        })
+                    });
+                }
+
+                // Show success screen with custom animation
+                const successOverlay = document.getElementById('successOverlay');
+                successOverlay.classList.add('active');
+
+                // Redirect to dashboard after a delay
+                setTimeout(() => {
+                    window.location.href = 'buyer-dashboard.html';
+                }, 2500);
+
+            } catch (err) {
+                console.error("Failed to place order", err);
+                if (orderBtn) {
+                    orderBtn.textContent = 'Complete Order';
+                    orderBtn.disabled = false;
+                }
+                alert("Failed to process order. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>

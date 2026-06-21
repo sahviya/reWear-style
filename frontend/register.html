@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — REWEAR.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-page-body">
+    <div class="auth-split-container">
+        <!-- Left Sidebar Banner -->
+        <aside class="auth-sidebar">
+            <a href="index.html" class="auth-sidebar-logo">REWEAR.</a>
+            
+            <div class="auth-sidebar-content">
+                <h2 class="auth-sidebar-title">Join the <em>Movement</em></h2>
+                <p class="auth-sidebar-text">Join the community and start buying or selling sustainable fashion. Give your closet a second chapter.</p>
+                
+                <div class="auth-sidebar-badges">
+                    <div class="auth-badge-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        100% Quality Checked
+                    </div>
+                    <div class="auth-badge-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Unbeatable Thrift Prices
+                    </div>
+                    <div class="auth-badge-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        Eco-Friendly Impact
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Content Area -->
+        <main class="auth-content">
+            <a href="index.html" class="auth-back-link" aria-label="Back to home">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to home
+            </a>
+
+            <div class="auth-card" style="max-width: 600px; padding: 2.5rem 3rem;">
+                <h1>Create Account</h1>
+                <p class="auth-subtitle">Join the community and start buying or selling sustainable fashion.</p>
+
+                <form class="auth-form" id="registerForm" novalidate>
+                    <div class="form-grid">
+                        <!-- Full Name -->
+                        <div class="auth-field full-width">
+                            <label for="fullName">Full Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required autocomplete="name">
+                            </div>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="auth-field">
+                            <label for="username">Username</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="username" name="username" placeholder="Choose a username" required autocomplete="username">
+                            </div>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="auth-field">
+                            <label for="email">Email Address</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" placeholder="you@email.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <!-- Mobile Number -->
+                        <div class="auth-field">
+                            <label for="mobile">Mobile Number</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="mobile" name="mobile" placeholder="10-digit mobile number" required autocomplete="tel">
+                            </div>
+                        </div>
+
+                        <!-- Gender (Optional) -->
+                        <div class="auth-field">
+                            <label for="gender">Gender <span class="optional">(Optional)</span></label>
+                            <div class="input-wrapper">
+                                <select id="gender" name="gender">
+                                    <option value="" disabled selected>Select gender</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="auth-field">
+                            <label for="password">Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="new-password">
+                                <button type="button" class="password-toggle" data-target="password" aria-label="Show password">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
+                            <!-- Password Strength Indicator -->
+                            <div class="strength-meter">
+                                <div class="strength-meter-bar">
+                                    <div class="strength-meter-fill" id="strengthFill"></div>
+                                </div>
+                                <div class="strength-meter-text">Strength: <span id="strengthLabel">Weak</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="auth-field">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required autocomplete="new-password">
+                                <button type="button" class="password-toggle" data-target="confirmPassword" aria-label="Show password">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="auth-field">
+                            <label for="city">City</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="city" name="city" placeholder="e.g. Mumbai" required autocomplete="address-level2">
+                            </div>
+                        </div>
+
+                        <!-- State -->
+                        <div class="auth-field">
+                            <label for="state">State</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="state" name="state" placeholder="e.g. Maharashtra" required autocomplete="address-level1">
+                            </div>
+                        </div>
+
+                        <!-- Agreement Checkboxes -->
+                        <div class="agreement-group full-width">
+                            <label class="agreement-label">
+                                <input type="checkbox" id="termsCheckbox" required>
+                                <span>I agree to the <a href="#" target="_blank">Terms & Conditions</a></span>
+                            </label>
+                            <label class="agreement-label">
+                                <input type="checkbox" id="privacyCheckbox" required>
+                                <span>I agree to the <a href="#" target="_blank">Privacy Policy</a></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-submit-btn" id="signUpBtn" style="margin-top: 0.5rem;">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="auth-card-footer">
+                    Already have an account? <a href="login.html">Sign In</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="auth.js?v=3"></script>
+</body>
+</html>
