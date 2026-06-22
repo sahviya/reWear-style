@@ -389,7 +389,8 @@ window.ALL_PRODUCTS = [...DEFAULT_PRODUCTS];
 
 // Read unified products list
 function getProducts() {
-    return window.ALL_PRODUCTS;
+    const userProducts = JSON.parse(localStorage.getItem('userProducts') || '[]');
+    return [...window.ALL_PRODUCTS, ...userProducts];
 }
 
 let activeClosetSeller = '';
